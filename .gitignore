@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# PrIMuS dataset (download separately; too large for git)
+primus/
+*.tgz
