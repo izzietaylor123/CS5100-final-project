@@ -1,6 +1,12 @@
 # macOS
 .DS_Store
 
+# Python virtual environment
+.venv/
+
 # PrIMuS dataset (download separately; too large for git)
 primus/
 *.tgz
+
+# Python cache
+__pycache__/
