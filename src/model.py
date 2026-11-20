@@ -101,6 +101,23 @@ class ConvolutionalLayer(nn.Module):
         return out.reshape(B, self.out_channels, H, W)
 
 
+class MaxPoolingLayer(nn.Module):
+    """
+    Reduces the spatial dimensions of CNN feature maps
+    by selecting the maximum value in each pooling window.
+    """
+
+    def __init__(self, kernel_size=2, stride=2):
+        super().__init__()
+
+        self.pool = nn.MaxPool2d(
+            kernel_size=kernel_size,
+            stride=stride
+        )
+
+    def forward(self, x):
+        return self.pool(x)
+
 # create the CNN
 
 
