@@ -18,7 +18,7 @@ DURATION_BEATS = {
 # example PrIMuS encoding for testing
 SAMPLE_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "sheet music", "primus", "package_aa", "110002955-1_12_1", "110002955-1_12_1.semantic",
+    "sheet music", "primus", "package_aa", "110002886-1_1_1", "110002886-1_1_1.semantic",
 )
 
 
@@ -107,6 +107,9 @@ def semantic_to_audio(tokens, bpm=120, sample_rate=44100):
 
 def load_semantic(path):
     """Reads a .semantic file (tab-separated tokens) into a list of tokens."""
+    if not os.path.isfile(path):
+        return f"Error: invalid file path: {path}"
+
     with open(path) as f:
         return f.read().split()
 
@@ -122,7 +125,7 @@ def sample_to_audio(sample=None, bpm=120, sample_rate=44100, play=True):
         sample = load_semantic(sample)
 
     if not isinstance(sample, list):
-        raise ValueError("sample must be a list of tokens or a path to a .semantic file")
+        print("Error: sample must be a list of tokens or a valid path to a .semantic file")
 
     audio = semantic_to_audio(sample, bpm=bpm, sample_rate=sample_rate)
 
@@ -136,5 +139,5 @@ if __name__ == "__main__":
     import sys
 
     # Usage: python src/convert_to_music.py [path/to/file.semantic]
-    path = sys.argv[1] if len(sys.argv) > 1 and os.path.isfile(sys.argv[1]) else None
+    path = sys.argv[1] if len(sys.argv) > 1 else None
     audio = sample_to_audio(path)
